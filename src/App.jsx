@@ -8,7 +8,7 @@ function App() {
   console.log(text);
 
   const removeStar = () => {
-    const a = text.replaceAll("°", "");
+    const a = text.replaceAll("*", "");
     setEditedText(a);
   };
 
