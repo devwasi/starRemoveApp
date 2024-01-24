@@ -5,15 +5,19 @@ import { Button, Stack, TextField, Typography } from "@mui/material";
 function App() {
   const [text, setText] = useState("");
   const [editedText, setEditedText] = useState("");
-  console.log(text);
 
   const removeStar = () => {
     const a = text.replaceAll("*", "");
     setEditedText(a);
+
   };
 
   const clearHandler = () => {
     setEditedText("");
+    setText("")
+  };
+  const copyHandler = () => {
+    navigator.clipboard.writeText(editedText)
   };
 
   return (
@@ -29,28 +33,28 @@ function App() {
         }}
       >
         <Stack sx={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Stack>
-            <TextField
-              label="Remove * from message"
-              multiline
-              rows={8}
-              variant="standard"
-              placeholder="enter your text / message"
-              onChange={(e) => setText(e.target.value)}
-            />
-          </Stack>
-          <Stack>
-            <Typography sx={{ color: "black" }} variant="h6">
-              Result
-            </Typography>
+          <Stack >
             <TextField
               label=""
               multiline
               rows={8}
-              defaultValue={editedText}
+              value={text}
+              variant="standard"
+              placeholder="enter your text / message"
+              onChange={(e) => setText(e.target.value)}
+              />
+          </Stack>
+          <Stack sx={{borderRadius:2,}}>
+            <TextField
+              label=""
+              multiline
+              contentEditable={false}
+              rows={8}
+              value={editedText}
               variant="standard"
             />
           </Stack>
+            <Button sx={{position: "static", bottom: 2}} onClick={copyHandler}>copy</Button>
         </Stack>
         <Stack>
           <Button variant="contained" onClick={() => removeStar()}>
